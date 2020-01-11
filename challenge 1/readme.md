@@ -1,0 +1,1 @@
+In this challenge we are taking birth year from people using js prompt and siaplaying the days they have been alive for and also reset it with js.

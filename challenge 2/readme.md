@@ -1,0 +1,1 @@
+In this challenge we are displaying gif with flex padding, justifying the content, margins and many more.
