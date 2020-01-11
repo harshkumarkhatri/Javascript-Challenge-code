@@ -1,0 +1,22 @@
+.containeer-1{
+    border: 5px solid red;
+    margin: auto;
+    width: 75%;
+    text-align: center;
+}
+
+
+.flex-box-containeer-1{
+    display: flex;
+    border:1px solid black;
+    padding: 10px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.flex-box-containeer-1 div {
+    display: flex;
+    padding:10px;
+    border:1px dotted brown;
+    align-items: center;
+}
