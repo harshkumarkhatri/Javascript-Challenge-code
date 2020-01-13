@@ -81,3 +81,8 @@ function rpsfrontend(humanimagechoice,botimagechoice,finalmessage) {
     document.getElementById('flex-box-rps-div').appendChild(botdiv);
     
 }
+
+//It will reset the images again for another round.
+function reset() {
+    document.location.reload(true)
+}
