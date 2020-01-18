@@ -1,23 +1,5 @@
-/*
-var blackjackgame={
-    'you':{'scorespan':'your-blackjack-result', 'div':'your-box','score':0},
-    'dealer':{'scorespan':'dealer-blackjack-result', 'div':'dealer-box','score':0 }
-}
-
-const YOU = blackjackgame['you']
-console.log(YOU)
-
-
-function blackjackhit() {
-    let cardimage=document.createElement('img')
-    cardimage.src='static/images/q.png'
-    m=YOU['div']
-    var div=document.getElementById(m)
-    m.appendChild(cardimage)
-    console.log(m)
-} 
-*/
-
+//First we have created the directory for the things which are we specifying inside this object.
+//We will access the things directly from our object. 
 var blackjackgame={
     'you':{'scorespan':'your-blackjack-result', 'div':'your-box','score':0},
     'dealer':{'scorespan':'dealer-blackjack-result', 'div':'dealer-box','score':0 },
@@ -30,35 +12,45 @@ var blackjackgame={
     'turnsover':false,
 }
 
+//These are made so that the accessing of desired result from the objects is easy.
 const YOU = blackjackgame['you']
 const DEALER=blackjackgame['dealer']
 
+//These are the sounds which will be played down once the action of winning, lossing or hitting takes place.
 const hitsound=new Audio('static/sounds/swish.m4a')
 const winsound=new Audio('static/sounds/cash.mp3')
 const lostsound=new Audio('static/sounds/aww.mp3')
 
-/*
-var el=document.getElementById('blackjack-hit-button')
-el.addEventListener('click',blackjackhit);
-*/
+//By the below 3 we get the query of the specified id being triggered by an action and 
+//a corresponding function being executed simultaneously with the help of the eventlistener.
 document.querySelector('#blackjack-hit-button').addEventListener('click',blackjackhit)
 document.querySelector('#blackjack-stand-button').addEventListener('click',dealerlogic)
-
 document.querySelector('#blackjack-deal-button').addEventListener('click',blackjackdeal)
+
+//It is the function which gets triggered when our chance button is clicked.
 function blackjackhit() {
+    //if statement is used to stop the our chance button from being clicked once the bot chance 
+    //button is clicked which is done by setting the isstand key of our object to true.
     if (blackjackgame['isstand']===false){
+        //randomcard function gets a random no. for which the card is obtained from the object.
+        //The card obtained from random card is passed into card varibale and that varibale is passed in various different functions.
         let card=randomcard()
+        //it is used to show the card in the div
         showcard(YOU,card)
+        //it is used to update the score
         updatescore(YOU,card)
+        //it is used to display the updated score.
         showscore(YOU)
     }
 }
 
+//used to generate arandom no. by the help of which random cards are obtained.
 function randomcard() {
     let randomindex=Math.floor(Math.random()*13)
     return blackjackgame['cards'][randomindex]
 }
 
+//used to show the card in the div
 function showcard(activeplayer,card) {
     //bust logic says if the score will be below 21 it will display card and score 
     //and if the score goes above 21 it will display bust.
@@ -70,21 +62,28 @@ function showcard(activeplayer,card) {
     }
 }
 
+//it is the function which sets the values back to original i.e. reseting the game for us to play it again.
 function blackjackdeal() {
+    //if statement checks the condition of the card being displayed by the bot and executes the rest of the code if the condition is true.
     if (blackjackgame['turnsover']===true){
+        //it sets the our chace button trigger variable back to normal
         blackjackgame['isstand']=false
         
+        //gets all the images which are present in both the div's
         let yourimages=document.querySelector('#your-box').querySelectorAll('img')
         let dealerimages=document.querySelector('#dealer-box').querySelectorAll('img')
 
-        console.log(yourimages)
+        //removes the images present in the div's
         for(i=0;i<yourimages.length;i++) {
         yourimages[i].remove()}
         for(i=0;i<dealerimages.length;i++) {
             dealerimages[i].remove()}
 
+        //sets the scores back to ero 
         YOU['score']=0
         DEALER['score']=0
+
+        //sets rest of the neccessary things back to normal.
         document.querySelector('#your-blackjack-result').textContent=0
         document.querySelector('#your-blackjack-result').style.color='white'
         document.querySelector('#dealer-blackjack-result').textContent=0
@@ -95,6 +94,7 @@ function blackjackdeal() {
     }
 } 
 
+//it updates the score of the active player(either us or dealer) which is passed in it.
 function updatescore(activeplayer,card) {
     //if adding 11 keeps us under 21 then add 11 else add 1
     if (card==='A'){
@@ -109,6 +109,7 @@ function updatescore(activeplayer,card) {
     }
 }
 
+//shows the score obtained in the desired position i.e. scorespan
 function showscore(activeplayer) {
     if (activeplayer['score']>21) {
         document.querySelector('#'+activeplayer['scorespan']).textContent='BUST!!'
@@ -118,26 +119,30 @@ function showscore(activeplayer) {
     }
 }
 
-function dealerlogic(){
-    blackjackgame['isstand']=true
-    let card=randomcard()
-    showcard(DEALER,card)
-    updatescore(DEALER,card)
-    showscore(DEALER)
-
-    if  (DEALER['score'] > 15) {
-        blackjackgame['turnsover']=true
-        let winner = computewinner()
-        showresult(winner)
-        console.log(blackjackgame['turnsover'])
-    }
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-//gwtting who the winner is
+async function dealerlogic(){
+    blackjackgame['isstand']=true
+
+    while(DEALER['score']<16 && blackjackgame['isstand']===true){
+        let card=randomcard()
+        showcard(DEALER,card)
+        updatescore(DEALER,card)
+        showscore(DEALER)
+        await sleep(1000)
+    }
+    blackjackgame['turnsover']=true
+    let winner = computewinner()
+    showresult(winner)    
+}
+
+//getting who the winner is
 function computewinner() {
     let winner
     if (YOU['score']<=21){
-        //conditionwhen higher scoe then dealer or dealer bust but you are under 21 or under
+        //condition when higher score then dealer or dealer bust but you are under 21 or under
         if (YOU['score']>DEALER['score'] || (DEALER['score']>21) ) {
             blackjackgame['wins']+=1
             winner=YOU
@@ -160,6 +165,7 @@ function computewinner() {
     return winner
 }
 
+//It displays the winner with the colour which we have passed and the message we want
 function showresult(winner) {
     let message, messagecolor;
 
