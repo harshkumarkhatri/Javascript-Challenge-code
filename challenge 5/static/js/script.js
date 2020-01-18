@@ -20,7 +20,8 @@ function blackjackhit() {
 
 var blackjackgame={
     'you':{'scorespan':'your-blackjack-result', 'div':'your-box','score':0},
-    'dealer':{'scorespan':'dealer-blackjack-result', 'div':'dealer-box','score':0 }
+    'dealer':{'scorespan':'dealer-blackjack-result', 'div':'dealer-box','score':0 },
+    'cards':['2','3','4','5','6','7','8','9','10','A','J','K','queen']
 }
 
 const YOU = blackjackgame['you']
@@ -34,12 +35,19 @@ el.addEventListener('click',blackjackhit);
 document.querySelector('#blackjack-hit-button').addEventListener('click',blackjackhit)
 document.querySelector('#blackjack-deal-button').addEventListener('click',blackjackdeal)
 function blackjackhit() {
-    showcard(YOU)
+    let card=randomcard()
+    console.log(card)
+    showcard(YOU,card)
 }
 
-function showcard(activeplayer) {
+function randomcard() {
+    let randomindex=Math.floor(Math.random()*13)
+    return blackjackgame['cards'][randomindex]
+}
+
+function showcard(activeplayer,card) {
     let cardimage=document.createElement('img')
-    cardimage.src='static/images/queen.png'
+    cardimage.src=`static/images/${card}.png`
     document.querySelector('#'+activeplayer['div']).appendChild(cardimage)
     hitsound.play()
 }
@@ -54,3 +62,4 @@ function blackjackdeal() {
     for(i=0;i<dealerimages.length;i++) {
         dealerimages[i].remove()}
 } 
+
