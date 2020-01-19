@@ -1,0 +1,24 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="header">Hello from html code</h1>
+    <script type="text/javascript">
+    // changing the text fo tags with id
+    document.getElementById("header").innerHTML="Text id changed"
+    //Printing the text of the id on screen
+    document.write(document.getElementById("header").innerHTML)
+    </script>
+    <!--Changing the text of the input field-->
+    <br>
+    <input type="text" id="inp" />
+    <script type="text/javascript">
+    document.getElementById("inp").value="Changed value in input"
+
+    </script>
+</body>
+</html>
