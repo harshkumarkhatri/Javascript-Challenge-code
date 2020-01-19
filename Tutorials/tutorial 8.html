@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="header">Hello from html code</h1>
+    <input type="text" id="inp">
+    <button id="but1" onclick="pressed()">RED</button>
+    <script type="text/javascript">
+    function pressed(){
+        var text=document.getElementById("inp").value
+        switch (text){
+            case "red":document.getElementById("header").style.color='red'
+            break
+            case "blue":document.getElementById("header").style.color='blue'
+            break
+            default:
+                document.getElementById("header").style.color='black'
+                break
+        }
+    }
+    </script>
+    
+</body>
+</html>
