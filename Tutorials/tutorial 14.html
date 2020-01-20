@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="header">Hello from html code</h1>
+    
+    <script type="text/javascript">
+    var _set=new Set()
+    _set.add(3).add(7).add(5).add(3)
+    console.log(_set)
+    console.log(_set.has(4))
+    console.log(_set.size)
+    console.log(_set.delete(3)) //return true or false for element deletion
+    console.log(_set.delete(4)) //return false when the element is not present for deletion.
+    console.log(_set.values()) //return all the values
+
+    for(var entry of _set.values()){
+        console.log(entry)
+    }
+
+    var set1=new Set([1,2,3,4,3,2,1])
+    console.log(set1)
+
+    //We will take every element from the set and pass to function to check the conditions
+    function test(x){
+        console.log(x)
+    }
+    var set2=new Set("hello")
+    set2.forEach(test)
+
+
+
+
+    //sets have the lookup time of 1 i.e. they take fraction of time to look for a particular element.
+    //arrays look through each of the elements.
+    </script>
+    
+</body>
+</html>
