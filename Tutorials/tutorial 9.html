@@ -1,0 +1,29 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="header">Hello from html code</h1>
+    <input type="text" id="inp">
+    <button id="but1" onclick="pressed()">RED</button>
+    <p id="output"></p>
+    <script type="text/javascript">
+    function pressed(){
+        var text=document.getElementById("inp").value
+        //output.innerHTML=text;
+        //These all do not change the original string rather they create a new temporary string for our convinience.
+        //output.innerHTML=text.toUpperCase();
+        //output.innerHTML=text.toLowerCase();   converts to lowercase
+        //output.innerHTML=text.startsWith("@"); Search whether a string start with this char
+        //output.innerHTML=text.endsWith("@");   Search wheteher a string ends with this char
+        //output.innerHTML=text.trim();          removes spaces
+        //console.log(text.length)               Gives length
+        
+        }
+    </script>
+    
+</body>
+</html>
