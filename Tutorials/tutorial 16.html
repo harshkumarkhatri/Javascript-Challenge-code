@@ -1,0 +1,53 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="header">Hello from html code</h1>
+
+    <script type="text/javascript">
+
+    var x=5 //immutable
+    var t=x //mutable
+
+    function add5(num){
+        num+=5
+        console.log(num)
+    }
+    add5(x)
+    console.log(x)
+
+    //if we have taken the reference of an array rather then the number then the 
+    //value would have changed if we have appended a value in the function itself.
+
+    function append5(arr) {
+        var arr2=arr;
+        //above statement doesnt hold the array rather creates a pointer to that array.
+        //This called alias where we can use a array which is pointed with another name.
+        arr2[1]=100
+        console.log(arr2)
+        console.log(arr)
+    }
+    var m=[1,2,3,4]
+    append5(m)
+    console.log(m)
+
+    //if in the abov code we want to copy the arr into arr2 then
+    var arr2=arr.slice()
+    //It will copy full array .
+    
+    //If we want to copy certain elements of the array
+    var arr2=arr.slice(0,4)
+    //It will copy 3 elements word by word.
+
+    //another way to copy the array
+    var arr2=[...arr]
+    //It copies all the values from that array.
+    
+    </script>
+    
+</body>
+</html>
