@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="header">Hello from html code</h1>
+
+    <script type="text/javascript">
+
+    var mp= new Map(
+        [
+            ['t',5],
+            ['v',8]
+        ]
+    )
+    console.log(mp.get('t'))
+    mp.set('m',9)
+    console.log(mp.get('m'))
+    mp.set(5,'hello')
+    console.log(mp.get(5))
+    console.log(mp.get('yo'))
+    console.log(mp.size)
+    mp.delete('m')
+    console.log(mp)
+    console.log(mp.has(5))
+    console.log(mp.entries())
+    for (var entry of mp) {
+        console.log(entry) //displays the whole key pair
+        console.log(entry[0]) //displays the keys
+        console.log(entry[1]) //display only values
+    }
+    mp.clear()
+
+    //getting the count of particular characters in a string
+    var mpo=new Map()
+    var str="this is a string"
+    for(var letter of str){
+        if (mpo.has(letter)){
+            mpo.set(letter,mpo.get(letter)+1)
+        } else [
+            mpo.set(letter,1)
+        ]
+    }
+    console.log(mpo)
+    
+    </script>
+    
+</body>
+</html>
